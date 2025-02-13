@@ -1,15 +1,14 @@
----
+------------------------------------------------------------------------
 
+------------------------------------------------------------------------
 
----
-
-```{library(tidyr)}
-install.packages("tidyr")
-```
+`{library(tidyr)} install.packages("tidyr")`
 
 ## Data Visualization
 
 For these data, I chose to use a scatterplot. This allows the viewer to compare the breastfeeding rates at 12 months to the hospital mPINC score. This is a very simple data visualization example.
+
+Yes... this sucks... I will do better..
 
 ```{r}
 
