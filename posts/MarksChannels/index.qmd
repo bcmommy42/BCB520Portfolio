@@ -1,0 +1,21 @@
+---
+title: “ASSIGNMENT 4”
+
+subtitle: “Marks and Channels”
+
+author: Betsy Church
+
+date: “2024-02-08”
+
+categories: [Assignment, DataViz]
+
+image: “some fun image you put in that new directory.png”
+
+code-fold: true
+
+code-tools: true
+
+description: “A clever description that describes the stuff”
+format: html
+---
+

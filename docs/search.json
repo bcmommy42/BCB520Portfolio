@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Hello! Welcome to my blog. I hope you’re having a fantastic day!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Betsy Church",
+    "section": "",
+    "text": "https://linkedin.com\nhttps://github.com\nBetsy Church is a Graduate Student at University of Idaho. Current research project is about the potential effects that a Staph. aureus infection may have on the tissue and secretion microbiomes of artificially induced lactation in heifers. When not in the lab, she can be found crocheting, watching medical drama on tv, or playing video games. Often times, her dog Finn or Cat Olivander can be found snuggled in her lap."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Betsy Church",
+    "section": "Education",
+    "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BCB504Portfolio",
+    "section": "",
+    "text": "Data Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“A clever description that describes the stuff”\n\n\n\n\n\nInvalid Date\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  }
+]
