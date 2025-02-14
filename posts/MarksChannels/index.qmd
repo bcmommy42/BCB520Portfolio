@@ -19,3 +19,48 @@ description: “A clever description that describes the stuff”
 format: html
 ---
 
+## Loading Library and Necessary Data
+
+```{r}
+
+##figure 1
+library(tidyverse)
+BSBC.Data <- read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv")
+ View(BSBC.Data)
+ 
+ df_long1 <- BSBC.Data %>%
+   select(Region,BF.2018,BF.2020,BF.2022) %>%
+   pivot_longer(cols = c(BF.2018,BF.2020,BF.2022),
+                names_to = "Year",
+                values_to = "BF",
+                names_prefix = "BF.")
+
+
+
+```
+
+## Expressiveness and Effectiveness
+
+Figure. 1
+
+```{r}
+ggplot(df_long1, aes(x=Region,y=BF))+
+  geom_bar(stat = "identity", aes(fill=Region)) +
+  xlab("WIC Region") +
+  ylab("BF Rate at 6 months (percent)") +
+  ggtitle("BF rate by WIC Region") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),
+        legend.position = "right")
+```
+
+Figure 2. What needs to be expressed here is expressed; Rates of breastfeeding at 6 months by state and it adds in years... However, the effectiveness is horrible. There is way too much going on and it is hard to follow and determine what is what. It really needs to be separate graphs, or separated by region instead of state or something to make it more clear and concise.
+
+```{r}
+ggplot(df_long, aes(x=State,y=BF))+
+  geom_bar(stat = "identity", aes(fill=State, alpha=year)) +
+  xlab("State") +
+  ylab("BF Rate at 6 months (percent") +
+  ggtitle("BF rate by state") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),
+        legend.position = "right")
+```
