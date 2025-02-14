@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "BCB504Portfolio"
+  title: "BCB520Portfolio"
   navbar:
     right:
       - about.qmd
