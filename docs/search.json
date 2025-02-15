@@ -28,6 +28,20 @@
     "text": "Expressiveness and Effectiveness\nFigure. 1\n\n\nCode\nggplot(df_long1, aes(x=Region,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=Region)) +\n  xlab(\"WIC Region\") +\n  ylab(\"BF Rate at 6 months (percent)\") +\n  ggtitle(\"BF rate by WIC Region\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")+\n  facet_wrap(~Year)\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_bar()`).\n\n\n\n\n\n\n\n\n\nFigure 2. What needs to be expressed here is expressed; Rates of breastfeeding at 6 months by state and it adds in years… However, the effectiveness is horrible. There is way too much going on and it is hard to follow and determine what is what. It really needs to be separate graphs, or separated by region instead of state or something to make it more clear and concise.\n\n\nCode\nggplot(df_long, aes(x=State,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=State, alpha=year)) +\n  xlab(\"State\") +\n  ylab(\"BF Rate at 6 months (percent\") +\n  ggtitle(\"BF rate by state\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")\n\n\nWarning: Using alpha for a discrete variable is not advised."
   },
   {
+    "objectID": "posts/MarksChannels/index.html#discriminability",
+    "href": "posts/MarksChannels/index.html#discriminability",
+    "title": "“ASSIGNMENT 4”",
+    "section": "Discriminability",
+    "text": "Discriminability\nFigure 3. Box and Whisker allows you to see outliers more easily. It also is just an easy way to see values, and is just overall very clean and easy to discern.\n\n\nCode\nggplot(data=df_long, aes(y=BF, x=year)) +\n  geom_boxplot() + \n  theme_minimal() + \n  labs( title = \"Distribution of BF by Year\", x = \"Year\", y = \"BF Value\" )\n\n\n\n\n\n\n\n\n\nFigure 4. This is unnecessary addition of color that doesn’t really add to the discernability.\n\n\nCode\nggplot(data=df_long, aes(y=BF, x=year)) +\n  geom_boxplot(fill= c(\"red\", \"blue\", \"green\"))"
+  },
+  {
+    "objectID": "posts/MarksChannels/index.html#seperability",
+    "href": "posts/MarksChannels/index.html#seperability",
+    "title": "“ASSIGNMENT 4”",
+    "section": "Seperability",
+    "text": "Seperability\nI feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:\n\n\nCode\nggplot(df_long1, aes(x=Region,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=Region)) +\n  xlab(\"WIC Region\") +\n  ylab(\"BF Rate at 6 months (percent)\") +\n  ggtitle(\"BF rate by WIC Region\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")+\n  facet_wrap(~Year)\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_bar()`).\n\n\n\n\n\n\n\n\n\nCode\nggplot(df_long, aes(x=State,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=State, alpha=year)) +\n  xlab(\"State\") +\n  ylab(\"BF Rate at 6 months (percent\") +\n  ggtitle(\"BF rate by state\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")\n\n\nWarning: Using alpha for a discrete variable is not advised.\n\n\n\n\n\n\n\n\n\n##PopOut\nI made it so that Alabama breastfeeding data from 2018 stood out as a red dot.\n\n\nCode\nr1&lt;-subset(BSBC.Data, State==\"Alabama\" )\nggplot(df_long1, aes(x=Year, y=BF))+\n  geom_point() +\n  theme_minimal()+\n   geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),\n             color = \"red\")\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_point()`)."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Betsy Church",

@@ -71,3 +71,62 @@ ggplot(df_long, aes(x=State,y=BF))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),
         legend.position = "right")
 ```
+
+## Discriminability
+
+Figure 3. Box and Whisker allows you to see outliers more easily. It also is just an easy way to see values, and is just overall very clean and easy to discern.
+
+```{r}
+ggplot(data=df_long, aes(y=BF, x=year)) +
+  geom_boxplot() + 
+  theme_minimal() + 
+  labs( title = "Distribution of BF by Year", x = "Year", y = "BF Value" )
+```
+
+ Figure 4. This is unnecessary addition of color that doesn't really add to the discernability.
+ 
+```{r}
+ggplot(data=df_long, aes(y=BF, x=year)) +
+  geom_boxplot(fill= c("red", "blue", "green"))
+ 
+ 
+``` 
+
+## Seperability 
+ 
+I feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:
+
+```{r}
+ggplot(df_long1, aes(x=Region,y=BF))+
+  geom_bar(stat = "identity", aes(fill=Region)) +
+  xlab("WIC Region") +
+  ylab("BF Rate at 6 months (percent)") +
+  ggtitle("BF rate by WIC Region") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),
+        legend.position = "right")+
+  facet_wrap(~Year)
+
+ggplot(df_long, aes(x=State,y=BF))+
+  geom_bar(stat = "identity", aes(fill=State, alpha=year)) +
+  xlab("State") +
+  ylab("BF Rate at 6 months (percent") +
+  ggtitle("BF rate by state") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),
+        legend.position = "right")
+```
+
+
+##PopOut
+
+I made it so that Alabama breastfeeding data from 2018 stood out as a red dot. 
+
+```{r}
+
+r1<-subset(BSBC.Data, State=="Alabama" )
+ggplot(df_long1, aes(x=Year, y=BF))+
+  geom_point() +
+  theme_minimal()+
+   geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),
+             color = "red")
+```
+
