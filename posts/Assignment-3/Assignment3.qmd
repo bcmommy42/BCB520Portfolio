@@ -2,6 +2,12 @@
 title: "Assignment 3"
 Author: Betsy Church
 format: html
+categories: [Assignment, DataViz]
+
+
+code-fold: true
+
+code-tools: true
 ---
 
 ```{r}
