@@ -2,6 +2,12 @@
 title: "Assignment 2"
 author: Betsy Church
 format: html
+categories: [Assignment, DataViz]
+
+
+code-fold: true
+
+code-tools: true
 ---
 
 ## Import Data Set
@@ -10,5 +16,7 @@ format: html
  BSBC.Data <- read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv")
    View(BSBC.Data)
 ```
+
 ## Description of Data Set
+
 This data set is tabular data and the attribute is categorical/quantitative. The data includes the breastfeeding rates (in %) of each state and the mPINC scores (algorithmic data) of each state. I have also included the breastfeeding rates of the different regions, based off of WIC regions. These all are from the year 2018,2020, and 2022.
