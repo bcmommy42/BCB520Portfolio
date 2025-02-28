@@ -1,0 +1,55 @@
+---
+title: "Assignment 3"
+Author: Betsy Church
+format: html
+---
+
+```{r}
+ BSBC.Data..BF.and.mPINC.over.3.reports <- read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data. BF and mPINC over 3 reports.csv")
+   View(BSBC.Data..BF.and.mPINC.over.3.reports)
+library(tidyverse)
+ View(BSBC.Data..BF.and.mPINC.over.3.reports)
+ BF2022 <- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months..2022
+ BF2020 <- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months.2020
+ BF2018 <- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months.2018
+ mPINC2022 <-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC..2022
+ mPINC2020 <-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC.at.2020
+ mPINC2018 <-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC.2018
+```
+
+```{r}
+# Assuming your data frame is called 'df'
+df_long <- BSBC.Data..BF.and.mPINC.over.3.reports %>%
+  rename(BF.at.6.months.2022=BF.at.6.months..2022) %>%
+  select(State,BF.at.6.months.2018, BF.at.6.months.2020, BF.at.6.months.2022) %>%
+  pivot_longer(
+    cols = c(BF.at.6.months.2018, BF.at.6.months.2020, BF.at.6.months.2022),  # Replace with your column names
+    names_to = "year",
+    values_to = "BF", 
+    names_prefix = "BF.at.6.months."
+  )
+
+
+
+ggplot(data=df_long, aes(y=BF, x=year)) +
+  geom_boxplot() + 
+  theme_minimal() + 
+  labs( title = "Distribution of BF by Year", x = "Year", y = "BF Value" )
+
+```
+```{r}
+df_long2 <- BSBC.Data..BF.and.mPINC.over.3.reports %>%
+  rename(mPINC.2022=mPINC..2022,
+         mPINC.2020=mPINC.at.2020) %>%
+  select(State,mPINC.2018, mPINC.2020, mPINC.2022) %>%
+  pivot_longer(
+    cols = c(mPINC.2018, mPINC.2020, mPINC.2022),  # Replace with your column names
+    names_to = "year",
+    values_to = "mPINC", 
+    names_prefix = "mPINC."
+  )
+
+ggplot(data=df_long2, aes(y=mPINC, x=year)) +
+  geom_boxplot()
+
+```

@@ -42,6 +42,34 @@
     "text": "Seperability\nI feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:\n\n\nCode\nggplot(df_long1, aes(x=Region,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=Region)) +\n  xlab(\"WIC Region\") +\n  ylab(\"BF Rate at 6 months (percent)\") +\n  ggtitle(\"BF rate by WIC Region\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")+\n  facet_wrap(~Year)\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_bar()`).\n\n\n\n\n\n\n\n\n\nCode\nggplot(df_long, aes(x=State,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=State, alpha=year)) +\n  xlab(\"State\") +\n  ylab(\"BF Rate at 6 months (percent\") +\n  ggtitle(\"BF rate by state\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")\n\n\nWarning: Using alpha for a discrete variable is not advised.\n\n\n\n\n\n\n\n\n\n##PopOut\nI made it so that Alabama breastfeeding data from 2018 stood out as a red dot.\n\n\nCode\nr1&lt;-subset(BSBC.Data, State==\"Alabama\" )\nggplot(df_long1, aes(x=Year, y=BF))+\n  geom_point() +\n  theme_minimal()+\n   geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),\n             color = \"red\")\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_point()`)."
   },
   {
+    "objectID": "posts/Assignment-3/Assignment3.html",
+    "href": "posts/Assignment-3/Assignment3.html",
+    "title": "Assignment 3",
+    "section": "",
+    "text": "BSBC.Data..BF.and.mPINC.over.3.reports &lt;- read.csv(\"C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data. BF and mPINC over 3 reports.csv\")\n   View(BSBC.Data..BF.and.mPINC.over.3.reports)\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.4.2\n\n\nWarning: package 'ggplot2' was built under R version 4.4.2\n\n\nWarning: package 'tidyr' was built under R version 4.4.2\n\n\nWarning: package 'readr' was built under R version 4.4.2\n\n\nWarning: package 'dplyr' was built under R version 4.4.2\n\n\nWarning: package 'forcats' was built under R version 4.4.2\n\n\nWarning: package 'lubridate' was built under R version 4.4.2\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n View(BSBC.Data..BF.and.mPINC.over.3.reports)\n BF2022 &lt;- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months..2022\n BF2020 &lt;- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months.2020\n BF2018 &lt;- BSBC.Data..BF.and.mPINC.over.3.reports$BF.at.6.months.2018\n mPINC2022 &lt;-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC..2022\n mPINC2020 &lt;-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC.at.2020\n mPINC2018 &lt;-BSBC.Data..BF.and.mPINC.over.3.reports$mPINC.2018\n\n\n# Assuming your data frame is called 'df'\ndf_long &lt;- BSBC.Data..BF.and.mPINC.over.3.reports %&gt;%\n  rename(BF.at.6.months.2022=BF.at.6.months..2022) %&gt;%\n  select(State,BF.at.6.months.2018, BF.at.6.months.2020, BF.at.6.months.2022) %&gt;%\n  pivot_longer(\n    cols = c(BF.at.6.months.2018, BF.at.6.months.2020, BF.at.6.months.2022),  # Replace with your column names\n    names_to = \"year\",\n    values_to = \"BF\", \n    names_prefix = \"BF.at.6.months.\"\n  )\n\n\n\nggplot(data=df_long, aes(y=BF, x=year)) +\n  geom_boxplot() + \n  theme_minimal() + \n  labs( title = \"Distribution of BF by Year\", x = \"Year\", y = \"BF Value\" )\n\n\n\n\n\n\n\n\n\ndf_long2 &lt;- BSBC.Data..BF.and.mPINC.over.3.reports %&gt;%\n  rename(mPINC.2022=mPINC..2022,\n         mPINC.2020=mPINC.at.2020) %&gt;%\n  select(State,mPINC.2018, mPINC.2020, mPINC.2022) %&gt;%\n  pivot_longer(\n    cols = c(mPINC.2018, mPINC.2020, mPINC.2022),  # Replace with your column names\n    names_to = \"year\",\n    values_to = \"mPINC\", \n    names_prefix = \"mPINC.\"\n  )\n\nggplot(data=df_long2, aes(y=mPINC, x=year)) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BCB504Portfolio",
+    "section": "",
+    "text": "Assignment 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAssignment 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAssignment 2\n\n\n\n\n\n\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Betsy Church",
+    "section": "",
+    "text": "https://linkedin.com\nhttps://github.com\nBetsy Church is a Graduate Student at University of Idaho. Current research project is about the potential effects that a Staph. aureus infection may have on the tissue and secretion microbiomes of artificially induced lactation in heifers. When not in the lab, she can be found crocheting, watching medical drama on tv, or playing video games. Often times, her dog Finn or Cat Olivander can be found snuggled in her lap."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Betsy Church",
+    "section": "Education",
+    "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
+  },
+  {
     "objectID": "posts/Anscomb-Quartet/Assignment 1.html",
     "href": "posts/Anscomb-Quartet/Assignment 1.html",
     "title": "Assignment 1",
@@ -68,27 +96,6 @@
     "title": "Assignment 1",
     "section": "Why Visualization Matters",
     "text": "Why Visualization Matters\n\nggplot(tidy_anscombe,\n       aes(x = x,\n           y = y)) +\n  geom_point() +\n  geom_point(data = tidy_anscombe_summary, aes(x=x_mean, y = y_mean, color = \"red\", size = 5),\n             show.legend = FALSE)+\n  facet_wrap(~set) +\n  geom_smooth(method = \"lm\", se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Betsy Church",
-    "section": "",
-    "text": "https://linkedin.com\nhttps://github.com\nBetsy Church is a Graduate Student at University of Idaho. Current research project is about the potential effects that a Staph. aureus infection may have on the tissue and secretion microbiomes of artificially induced lactation in heifers. When not in the lab, she can be found crocheting, watching medical drama on tv, or playing video games. Often times, her dog Finn or Cat Olivander can be found snuggled in her lap."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Betsy Church",
-    "section": "Education",
-    "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BCB504Portfolio",
-    "section": "",
-    "text": "Assignment 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAssignment 2\n\n\n\n\n\n\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/Data-Set-Assignment-2/Assignment 2.html",
