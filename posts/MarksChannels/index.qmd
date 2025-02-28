@@ -83,17 +83,17 @@ ggplot(data=df_long, aes(y=BF, x=year)) +
   labs( title = "Distribution of BF by Year", x = "Year", y = "BF Value" )
 ```
 
- Figure 4. This is unnecessary addition of color that doesn't really add to the discernability.
- 
+Figure 4. This is unnecessary addition of color that doesn't really add to the discernability.
+
 ```{r}
 ggplot(data=df_long, aes(y=BF, x=year)) +
   geom_boxplot(fill= c("red", "blue", "green"))
  
  
-``` 
+```
 
-## Seperability 
- 
+## Seperability
+
 I feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:
 
 ```{r}
@@ -115,10 +115,9 @@ ggplot(df_long, aes(x=State,y=BF))+
         legend.position = "right")
 ```
 
-
 ##PopOut
 
-I made it so that Alabama breastfeeding data from 2018 stood out as a red dot. 
+I made it so that Alabama breastfeeding data from 2018 stood out as a red dot.
 
 ```{r}
 
@@ -129,4 +128,3 @@ ggplot(df_long1, aes(x=Year, y=BF))+
    geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),
              color = "red")
 ```
-

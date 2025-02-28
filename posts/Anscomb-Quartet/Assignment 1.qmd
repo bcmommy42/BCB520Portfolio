@@ -1,9 +1,18 @@
 ---
 title: "Assignment 1"
+Author: Betsy Church
 format: html
+
+categories: [Assignment, DataViz]
+
+
+code-fold: true
+
+code-tools: true
 ---
 
 ## Anscombe Quartet- Library choices
+
 ```{r}
 library(ggplot2)
 library(grid)
