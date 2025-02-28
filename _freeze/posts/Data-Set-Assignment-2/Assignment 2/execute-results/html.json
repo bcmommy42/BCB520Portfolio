@@ -1,0 +1,15 @@
+{
+  "hash": "c42a2b5860c94a74b29707f3b4332a66",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Assignment 2\"\nauthor: Betsy Church\nformat: html\n---\n\n\n\n## Import Data Set\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n BSBC.Data <- read.csv(\"C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv\")\n   View(BSBC.Data)\n```\n:::\n\n\n## Description of Data Set\nThis data set is tabular data and the attribute is categorical/quantitative. The data includes the breastfeeding rates (in %) of each state and the mPINC scores (algorithmic data) of each state. I have also included the breastfeeding rates of the different regions, based off of WIC regions. These all are from the year 2018,2020, and 2022.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

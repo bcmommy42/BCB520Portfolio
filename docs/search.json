@@ -42,27 +42,6 @@
     "text": "Seperability\nI feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:\n\n\nCode\nggplot(df_long1, aes(x=Region,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=Region)) +\n  xlab(\"WIC Region\") +\n  ylab(\"BF Rate at 6 months (percent)\") +\n  ggtitle(\"BF rate by WIC Region\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")+\n  facet_wrap(~Year)\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_bar()`).\n\n\n\n\n\n\n\n\n\nCode\nggplot(df_long, aes(x=State,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=State, alpha=year)) +\n  xlab(\"State\") +\n  ylab(\"BF Rate at 6 months (percent\") +\n  ggtitle(\"BF rate by state\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")\n\n\nWarning: Using alpha for a discrete variable is not advised.\n\n\n\n\n\n\n\n\n\n##PopOut\nI made it so that Alabama breastfeeding data from 2018 stood out as a red dot.\n\n\nCode\nr1&lt;-subset(BSBC.Data, State==\"Alabama\" )\nggplot(df_long1, aes(x=Year, y=BF))+\n  geom_point() +\n  theme_minimal()+\n   geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),\n             color = \"red\")\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_point()`)."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BCB504Portfolio",
-    "section": "",
-    "text": "Assignment 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Betsy Church",
-    "section": "",
-    "text": "https://linkedin.com\nhttps://github.com\nBetsy Church is a Graduate Student at University of Idaho. Current research project is about the potential effects that a Staph. aureus infection may have on the tissue and secretion microbiomes of artificially induced lactation in heifers. When not in the lab, she can be found crocheting, watching medical drama on tv, or playing video games. Often times, her dog Finn or Cat Olivander can be found snuggled in her lap."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Betsy Church",
-    "section": "Education",
-    "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
-  },
-  {
     "objectID": "posts/Anscomb-Quartet/Assignment 1.html",
     "href": "posts/Anscomb-Quartet/Assignment 1.html",
     "title": "Assignment 1",
@@ -89,5 +68,47 @@
     "title": "Assignment 1",
     "section": "Why Visualization Matters",
     "text": "Why Visualization Matters\n\nggplot(tidy_anscombe,\n       aes(x = x,\n           y = y)) +\n  geom_point() +\n  geom_point(data = tidy_anscombe_summary, aes(x=x_mean, y = y_mean, color = \"red\", size = 5),\n             show.legend = FALSE)+\n  facet_wrap(~set) +\n  geom_smooth(method = \"lm\", se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Betsy Church",
+    "section": "",
+    "text": "https://linkedin.com\nhttps://github.com\nBetsy Church is a Graduate Student at University of Idaho. Current research project is about the potential effects that a Staph. aureus infection may have on the tissue and secretion microbiomes of artificially induced lactation in heifers. When not in the lab, she can be found crocheting, watching medical drama on tv, or playing video games. Often times, her dog Finn or Cat Olivander can be found snuggled in her lap."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Betsy Church",
+    "section": "Education",
+    "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BCB504Portfolio",
+    "section": "",
+    "text": "Assignment 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAssignment 2\n\n\n\n\n\n\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/Data-Set-Assignment-2/Assignment 2.html",
+    "href": "posts/Data-Set-Assignment-2/Assignment 2.html",
+    "title": "Assignment 2",
+    "section": "",
+    "text": "BSBC.Data &lt;- read.csv(\"C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv\")\n   View(BSBC.Data)"
+  },
+  {
+    "objectID": "posts/Data-Set-Assignment-2/Assignment 2.html#import-data-set",
+    "href": "posts/Data-Set-Assignment-2/Assignment 2.html#import-data-set",
+    "title": "Assignment 2",
+    "section": "",
+    "text": "BSBC.Data &lt;- read.csv(\"C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv\")\n   View(BSBC.Data)"
+  },
+  {
+    "objectID": "posts/Data-Set-Assignment-2/Assignment 2.html#description-of-data-set",
+    "href": "posts/Data-Set-Assignment-2/Assignment 2.html#description-of-data-set",
+    "title": "Assignment 2",
+    "section": "Description of Data Set",
+    "text": "Description of Data Set\nThis data set is tabular data and the attribute is categorical/quantitative. The data includes the breastfeeding rates (in %) of each state and the mPINC scores (algorithmic data) of each state. I have also included the breastfeeding rates of the different regions, based off of WIC regions. These all are from the year 2018,2020, and 2022."
   }
 ]
