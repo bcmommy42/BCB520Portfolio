@@ -42,6 +42,13 @@
     "text": "Seperability\nI feel like Figures 1 & 2 are good examples of this as well, so I am repeating them in this section:\n\n\nCode\nggplot(df_long1, aes(x=Region,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=Region)) +\n  xlab(\"WIC Region\") +\n  ylab(\"BF Rate at 6 months (percent)\") +\n  ggtitle(\"BF rate by WIC Region\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")+\n  facet_wrap(~Year)\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_bar()`).\n\n\n\n\n\n\n\n\n\nCode\nggplot(df_long, aes(x=State,y=BF))+\n  geom_bar(stat = \"identity\", aes(fill=State, alpha=year)) +\n  xlab(\"State\") +\n  ylab(\"BF Rate at 6 months (percent\") +\n  ggtitle(\"BF rate by state\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 0.1),\n        legend.position = \"right\")\n\n\nWarning: Using alpha for a discrete variable is not advised.\n\n\n\n\n\n\n\n\n\n##PopOut\nI made it so that Alabama breastfeeding data from 2018 stood out as a red dot.\n\n\nCode\nr1&lt;-subset(BSBC.Data, State==\"Alabama\" )\nggplot(df_long1, aes(x=Year, y=BF))+\n  geom_point() +\n  theme_minimal()+\n   geom_point(data = r1, aes(x=State, y =BF.at.6.months.2018),\n             color = \"red\")\n\n\nWarning: Removed 126 rows containing missing values or values outside the scale range\n(`geom_point()`)."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BCB504Portfolio",
+    "section": "",
+    "text": "Assignment 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Betsy Church",
@@ -56,10 +63,31 @@
     "text": "Education\nUniversity of Idaho | Moscow, ID\nPhD in Nutrition Sciences | August 2023- Present\nWeber State University | Ogden, UT\nBachelor of Science in Microbiology | August 2016- April 2021"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BCB504Portfolio",
+    "objectID": "posts/Anscomb-Quartet/Assignment 1.html",
+    "href": "posts/Anscomb-Quartet/Assignment 1.html",
+    "title": "Assignment 1",
     "section": "",
-    "text": "“ASSIGNMENT 4”\n\n\n“Marks and Channels”\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n“Marks and Channels doing their thing and… Not doing it well sometimes.”\n\n\n\n\n\nBetsy Church\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nFeb 9, 2025\n\n\nBetsy Church\n\n\n\n\n\n\nNo matching items"
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.4.2\n\nlibrary(grid)\nlibrary(gridExtra)\n\nWarning: package 'gridExtra' was built under R version 4.4.2\n\nlibrary(datasets)\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.4.2\n\n\nWarning: package 'tidyr' was built under R version 4.4.2\n\n\nWarning: package 'readr' was built under R version 4.4.2\n\n\nWarning: package 'dplyr' was built under R version 4.4.2\n\n\nWarning: package 'forcats' was built under R version 4.4.2\n\n\nWarning: package 'lubridate' was built under R version 4.4.2\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.4     ✔ tibble    3.2.1\n✔ purrr     1.0.2     ✔ tidyr     1.3.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::combine() masks gridExtra::combine()\n✖ dplyr::filter()  masks stats::filter()\n✖ dplyr::lag()     masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(dplyr)\ndatasets::anscombe\n\n   x1 x2 x3 x4    y1   y2    y3    y4\n1  10 10 10  8  8.04 9.14  7.46  6.58\n2   8  8  8  8  6.95 8.14  6.77  5.76\n3  13 13 13  8  7.58 8.74 12.74  7.71\n4   9  9  9  8  8.81 8.77  7.11  8.84\n5  11 11 11  8  8.33 9.26  7.81  8.47\n6  14 14 14  8  9.96 8.10  8.84  7.04\n7   6  6  6  8  7.24 6.13  6.08  5.25\n8   4  4  4 19  4.26 3.10  5.39 12.50\n9  12 12 12  8 10.84 9.13  8.15  5.56\n10  7  7  7  8  4.82 7.26  6.42  7.91\n11  5  5  5  8  5.68 4.74  5.73  6.89"
+  },
+  {
+    "objectID": "posts/Anscomb-Quartet/Assignment 1.html#anscombe-quartet--library-choices",
+    "href": "posts/Anscomb-Quartet/Assignment 1.html#anscombe-quartet--library-choices",
+    "title": "Assignment 1",
+    "section": "",
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.4.2\n\nlibrary(grid)\nlibrary(gridExtra)\n\nWarning: package 'gridExtra' was built under R version 4.4.2\n\nlibrary(datasets)\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.4.2\n\n\nWarning: package 'tidyr' was built under R version 4.4.2\n\n\nWarning: package 'readr' was built under R version 4.4.2\n\n\nWarning: package 'dplyr' was built under R version 4.4.2\n\n\nWarning: package 'forcats' was built under R version 4.4.2\n\n\nWarning: package 'lubridate' was built under R version 4.4.2\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.4     ✔ tibble    3.2.1\n✔ purrr     1.0.2     ✔ tidyr     1.3.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::combine() masks gridExtra::combine()\n✖ dplyr::filter()  masks stats::filter()\n✖ dplyr::lag()     masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(dplyr)\ndatasets::anscombe\n\n   x1 x2 x3 x4    y1   y2    y3    y4\n1  10 10 10  8  8.04 9.14  7.46  6.58\n2   8  8  8  8  6.95 8.14  6.77  5.76\n3  13 13 13  8  7.58 8.74 12.74  7.71\n4   9  9  9  8  8.81 8.77  7.11  8.84\n5  11 11 11  8  8.33 9.26  7.81  8.47\n6  14 14 14  8  9.96 8.10  8.84  7.04\n7   6  6  6  8  7.24 6.13  6.08  5.25\n8   4  4  4 19  4.26 3.10  5.39 12.50\n9  12 12 12  8 10.84 9.13  8.15  5.56\n10  7  7  7  8  4.82 7.26  6.42  7.91\n11  5  5  5  8  5.68 4.74  5.73  6.89"
+  },
+  {
+    "objectID": "posts/Anscomb-Quartet/Assignment 1.html#tidied-up",
+    "href": "posts/Anscomb-Quartet/Assignment 1.html#tidied-up",
+    "title": "Assignment 1",
+    "section": "Tidied up",
+    "text": "Tidied up\n\ntidy_anscombe &lt;- anscombe %&gt;%\n pivot_longer(cols = everything(),\n              names_to = c(\".value\", \"set\"),\n              names_pattern = \"(.)(.)\")\ntidy_anscombe_summary &lt;- tidy_anscombe %&gt;%\n  group_by(set) %&gt;%\n  summarise(across(.cols = everything(),\n                   .fns = lst(min,max,median,mean,sd,var),\n                   .names = \"{col}_{fn}\"))\n#&gt; `summarise()` ungrouping output (override with `.groups` argument)\n\nvars&lt;-c(\"set\", \"x_mean\", \"x_var\",  \"y_mean\", \"y_var\")\nthing&lt;- as.data.frame(tidy_anscombe_summary[vars])\nknitr::kable(thing)\n\n\n\n\nset\nx_mean\nx_var\ny_mean\ny_var\n\n\n\n\n1\n9\n11\n7.500909\n4.127269\n\n\n2\n9\n11\n7.500909\n4.127629\n\n\n3\n9\n11\n7.500000\n4.122620\n\n\n4\n9\n11\n7.500909\n4.123249"
+  },
+  {
+    "objectID": "posts/Anscomb-Quartet/Assignment 1.html#why-visualization-matters",
+    "href": "posts/Anscomb-Quartet/Assignment 1.html#why-visualization-matters",
+    "title": "Assignment 1",
+    "section": "Why Visualization Matters",
+    "text": "Why Visualization Matters\n\nggplot(tidy_anscombe,\n       aes(x = x,\n           y = y)) +\n  geom_point() +\n  geom_point(data = tidy_anscombe_summary, aes(x=x_mean, y = y_mean, color = \"red\", size = 5),\n             show.legend = FALSE)+\n  facet_wrap(~set) +\n  geom_smooth(method = \"lm\", se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'"
   }
 ]

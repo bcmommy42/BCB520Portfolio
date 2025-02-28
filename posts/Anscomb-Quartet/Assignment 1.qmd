@@ -1,0 +1,49 @@
+---
+title: "Assignment 1"
+format: html
+---
+
+## Anscombe Quartet- Library choices
+```{r}
+library(ggplot2)
+library(grid)
+library(gridExtra)
+library(datasets)
+library(tidyverse)
+library(dplyr)
+datasets::anscombe
+
+```
+
+## Tidied up
+
+```{r}
+tidy_anscombe <- anscombe %>%
+ pivot_longer(cols = everything(),
+              names_to = c(".value", "set"),
+              names_pattern = "(.)(.)")
+tidy_anscombe_summary <- tidy_anscombe %>%
+  group_by(set) %>%
+  summarise(across(.cols = everything(),
+                   .fns = lst(min,max,median,mean,sd,var),
+                   .names = "{col}_{fn}"))
+#> `summarise()` ungrouping output (override with `.groups` argument)
+
+vars<-c("set", "x_mean", "x_var",  "y_mean", "y_var")
+thing<- as.data.frame(tidy_anscombe_summary[vars])
+knitr::kable(thing)
+```
+
+## Why Visualization Matters
+
+```{r}
+
+ggplot(tidy_anscombe,
+       aes(x = x,
+           y = y)) +
+  geom_point() +
+  geom_point(data = tidy_anscombe_summary, aes(x=x_mean, y = y_mean, color = "red", size = 5),
+             show.legend = FALSE)+
+  facet_wrap(~set) +
+  geom_smooth(method = "lm", se = FALSE)
+```
