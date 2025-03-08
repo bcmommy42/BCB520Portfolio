@@ -2,7 +2,13 @@
 title: "Assignment 5- Hockey Ballot"
 author: Betsy Church
 format: html
+
 categories: [Assignment, DataViz]
+
+code-fold: true
+
+code-tools: true
+
 ---
 
 # This assignment is about using data visualization to help choose what NHL Players are deserving of specific awards based on multiple different factors.
