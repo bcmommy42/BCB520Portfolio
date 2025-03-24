@@ -1,0 +1,180 @@
+---
+title: "Assignment_6_Hockey_Ballots_Winner"
+format: html
+categories: [Assignment, DataViz]
+code-fold: true
+code-tools: true
+
+---
+## In this assignment, we are combining everyone's data to figure out who would win each award.
+
+We start out by uploading the data set and getting our library packages all ready.
+```{r, warning=FALSE}
+library(tidyverse)
+library(dplyr)
+
+CombinedNHL <- read.csv("C:/Users/betsy/OneDrive/CombinedNHL.csv")
+
+```
+## The Hart Memorial Trophy
+```{r, warning=FALSE}
+
+Hart1 <- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Hart")
+
+Weighted <-Hart1 %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+  
+       
+
+```
+Based on the classroom votes, the winner of the Hart Trophy is **Leon Draisaitl**
+
+## The Vezina Trophy
+
+```{r, warning=FALSE}
+Vez1 <- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Vezina")
+
+Weighted1 <-Vez1 %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted1, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+
+
+```
+
+Based on classroom votes, **Connor Hallebuyck** is the winner!
+
+
+## The Calder Memorial Trophy
+```{r, warning=FALSE}
+Cal <- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Calder")
+
+Weighted2 <-Cal %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted2, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+
+
+```
+
+Based on our classroom vote, **Kirill Marchenko**
+
+## The Frank J.Selke Trophy
+
+```{r, warning=FALSE}
+Selke <- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Selke")
+
+Weighted3 <-Selke %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted3, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+```
+Based on the classroom votes, the winner is **Brandon Tanev**
+
+## The Lady Byng Memorial Trophy
+```{r, warning=FALSE}
+Byng<- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Byng")
+
+Weighted4 <-Byng %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted4, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+
+```
+
+Based on classroom votes, the winner is **Brayden Point**
+
+## The James Norris Memorial Trophy
+```{r, warning=FALSE}
+
+Norris<- CombinedNHL %>%
+  select(Award, Rank, Player) %>%
+  filter(Award == "Norris")
+
+Weighted5 <-Norris %>%
+  mutate(
+    WeightedScore = case_when(
+      Rank == 1 ~ 10,
+      Rank == 2 ~ 7,
+      Rank == 3 ~ 5,
+      Rank == 4 ~ 3,
+      Rank == 5 ~ 1
+    )
+  )
+
+ggplot(data=Weighted5, aes(x= WeightedScore,  y= reorder(Player, WeightedScore)))+
+geom_col()+
+  xlab("Weighted Score")+
+  ylab("Player")
+
+
+```
+
+Based on classroom votes, the winner is **Cale Makar**

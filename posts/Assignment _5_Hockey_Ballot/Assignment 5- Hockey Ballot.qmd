@@ -2,20 +2,16 @@
 title: "Assignment 5- Hockey Ballot"
 author: Betsy Church
 format: html
-
 categories: [Assignment, DataViz]
-
 code-fold: true
-
 code-tools: true
-
 ---
 
 # This assignment is about using data visualization to help choose what NHL Players are deserving of specific awards based on multiple different factors.
 
 ## Load Library and Environments
 
-```{r}
+```{r, warning=FALSE}
 
 library(tidyverse)
 library(dplyr)
@@ -29,6 +25,7 @@ RSUCKS <- read.csv("C:/Users/betsy/OneDrive/Desktop/R_sucks.csv")
 ```
 
 ## Hart Memorial Trophy
+
 Awarded to the “player judged most valuable to his team.” This isn’t necessarily the best overall player, but rather the one who contributes most significantly to his team’s success.
 
 ```{r}
@@ -70,6 +67,7 @@ Based on the data here, with higher CF% meaning a more positive contribution to 
 5.Rasmus Asblund
 
 ## Vezina Trophy
+
 Presented to the goaltender “adjudged to be the best at this position.” NHL general managers vote on this award.
 
 ```{r}
@@ -92,6 +90,7 @@ ggplot(data=filtered_vez, aes(x=SV., y= reorder(Player, SV.))) +
 
 
 ```
+
 This is great... But potentially misleading... Let's dig a bit deeper because who catches things 100% of the time? We want to know who has played the most games. So we are going to filter it to an arbitrary number of 45. This leaves us with 5 players.. Perfect! From there, let's look back at SV% with just those 5...
 
 ```{r}
@@ -107,13 +106,14 @@ geom_col()
 
 Based on the SV% of these five players I am casting my ballot as follows:
 
-1. Connor Hellebuyck
-2. Andrei Vasilevskiy
-3. Ilya Sorokin
-4. Sam Montembeault
-5. Juuse Saros
+1.  Connor Hellebuyck
+2.  Andrei Vasilevskiy
+3.  Ilya Sorokin
+4.  Sam Montembeault
+5.  Juuse Saros
 
 ## James Norris Memorial Trophy
+
 Awarded to the defenseman who demonstrates “the greatest all-around ability” at the position.
 
 ```{R}
@@ -127,6 +127,7 @@ geom_col()
 
 
 ```
+
 This shows how many shots the individual blocked. Let's take a look at another aspect of defense and see if there are any overlaps!
 
 ```{R}
@@ -139,15 +140,17 @@ JN_trophy1 <-data.frame(SkaterIndividualstats) %>%
 geom_col()
 
 ```
+
 Hmm... There is only 1 name that overlaps and that is Jake Sanderson. So I will put him at the top of my list... I then have to decide what is more important; blocks or takeaways.... I can't choose so I am going to sprinkle in both and vote the following:
 
-1. Jake Sanderson
-2. Ian Cole
-3. Jaccob Slavin
-4. Jacob Trouba
-5. Cale Makar
+1.  Jake Sanderson
+2.  Ian Cole
+3.  Jaccob Slavin
+4.  Jacob Trouba
+5.  Cale Makar
 
 ## Calder Memorial Trophy
+
 Given to the player “adjudged to be the most proficient in his first year of competition.” This is essentially the rookie of the year award.
 
 ```{r}
@@ -160,15 +163,17 @@ geom_col()
 
 
 ```
+
 Once again, I'm using CF% as my metric. Based on that, I would cast my ballot as follows:
 
-1. Nathan Clurman
-2. Samuel Bolduc
-3. Angus Crookshank
-4. Ryan Suzuki
-5. Alex Laferriere
+1.  Nathan Clurman
+2.  Samuel Bolduc
+3.  Angus Crookshank
+4.  Ryan Suzuki
+5.  Alex Laferriere
 
 ## Frank J Selke Memorial Trophy
+
 Awarded to the forward who best excels in the defensive aspects of the game.
 
 I read that there are 3 forward positions: Center, Left wing and Right wing. I am going to look at Center position first. I am choosing to base the defensive aspect on blocking shots.
@@ -184,6 +189,7 @@ ggplot(data=FJS_Trophy_Center, aes(x=Shots.Blocked, y= reorder(Player, Shots.Blo
 geom_col()
 
 ```
+
 I am now going to look at the Left wing
 
 ```{r}
@@ -199,6 +205,7 @@ geom_col()
 ```
 
 Now I am looking at Right wing
+
 ```{r}
 FJS_Trophy_Right <-data.frame(SkaterIndividualstats) %>%
   filter(Position == "R") %>%
@@ -213,14 +220,14 @@ geom_col()
 
 After looking at all of the forward positions and seeing who blocked greater than 60 shots I would cast my ballot as follows:
 
-1. Brandon Tanev
-2. Alex Tuch
-3. Noel Acciari
-4. Vincent Trocheck
-5. Rickard Rakell
-
+1.  Brandon Tanev
+2.  Alex Tuch
+3.  Noel Acciari
+4.  Vincent Trocheck
+5.  Rickard Rakell
 
 ## Lady Byng Memorial Trophy
+
 Presented to the player who exhibits “the best type of sportsmanship and gentlemanly conduct combined with a high standard of playing ability.”
 
 For this one, I plan to find the players with the lowest number of penalties, no misconduct, and the most points
@@ -235,10 +242,11 @@ LBM_trophy <-data.frame(SkaterIndividualstats) %>%
 ggplot(data=LBM_trophy, aes(x=Total.Points, y= reorder(Player, Total.Points)))+
 geom_col()
 ```
+
 Based on this criteria, I cast my ballot as follows:
 
-1. Kyle Connor
-2. Sidney Crosby
-3. Brayden Point
-4. Anze Kopitar
-5. Shea Theodore
+1.  Kyle Connor
+2.  Sidney Crosby
+3.  Brayden Point
+4.  Anze Kopitar
+5.  Shea Theodore
