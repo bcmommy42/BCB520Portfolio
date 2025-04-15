@@ -1,0 +1,51 @@
+---
+title: "Spatial Data"
+author: "Betsy Church"
+date: "4/15/2025"
+format: html
+categories: [Assignment, DataViz]
+code-fold: true
+code-tools: true
+---
+
+
+##Spatial Data
+
+I made a heat map of the breastfeeding rates at 6 months across the US, based off of the Breastfeeding Report Card data from the CDC for 2022.
+
+```{r, message=FALSE, warning=FALSE}
+
+read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv")
+
+# Load necessary libraries
+library(ggplot2)
+library(sf)
+library(dplyr)
+library(maps)
+
+# Example breastfeeding data
+breastfeeding_data <- read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data.csv")
+
+# Get US states map data
+us_states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
+
+# Correct state names to match the map data (lowercase and no spaces)
+breastfeeding_data$State <- tolower(breastfeeding_data$State)
+
+# Merge the breastfeeding data with the spatial data
+merged_data <- us_states %>%
+  mutate(State = tolower(ID)) %>%
+  left_join(breastfeeding_data, by = c("State" = "State"))
+
+# Plot the heat map
+ggplot(merged_data) +
+  geom_sf(aes(fill = BF.at.6.months..2022)) +
+  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
+  labs(title = "Breastfeeding Rates at 6 Months by State (2022)",
+       fill = "Rate (%)") +
+  theme_minimal() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank())
+
+
+
+```

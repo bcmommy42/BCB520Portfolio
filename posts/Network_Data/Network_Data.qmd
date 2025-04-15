@@ -1,0 +1,162 @@
+---
+title: "Network_Data"
+format: html
+---
+
+```{r, message=FALSE, warning=FALSE}
+# Create the data frame
+data <- data.frame(
+  name = c("Betsy", "Claire", "Barrie", "Henry", "Ian", "John", "Kyle", "Marwa", "Priya", "Justice", "Sharon"),
+  microbiology = c(1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0),
+  crochet = c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+  BehavioralEcology = c(0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0),
+  ListeningToMusic = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1),
+  BeefFabrication = c(0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+  Gardening = c(1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0),
+  AI = c(0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1),
+  StainedGlass = c(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0),
+  Entomology = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+  Terrariums = c(0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0),
+  MATLAB = c(0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0),
+  Architecture = c(0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0),
+  DataScience = c(1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1),
+  Pinball = c(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
+  PublicAdministration = c(0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1),
+  Lifting = c(0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0),
+  Genomics = c(1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0),
+  Movies = c(1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1),
+  Mathematica = c(0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1),
+  Driving = c(1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1),
+  MassSpec = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+  Hiking = c(0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1)
+)
+
+# Remove the name column for the adjacency matrix
+adj_matrix <- as.matrix(data[, -1])
+
+# Print the adjacency matrix
+print(adj_matrix)
+
+
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+
+# Set a CRAN mirror
+chooseCRANmirror(graphics = FALSE, ind = 1) # This sets the first CRAN mirror from the list
+
+install.packages("igraph")
+
+# Load the necessary library
+library(ggplot2)
+
+# Define the edges based on the provided data
+edges <- data.frame(
+  from = c("Betsy", "Claire", "Henry", "Ian", "John", "Justice", "Kyle", "Marwa", "Priya", "Sharon"),
+  to = c("Shelley", "Phil", "Armando", "Ching-An", "Terence", "Nuismer", "Simona", "Manoj", "Adam", "Shelley"),
+  connected = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)
+)
+
+# Extract unique nodes
+nodes <- unique(c(edges$from, edges$to))
+
+# Assign positions for plotting (e.g., in a circle for simplicity)
+angles <- seq(0, 2*pi, length.out = length(nodes) + 1)
+node_positions <- data.frame(
+  name = nodes,
+  x = cos(angles[-length(angles)]),
+  y = sin(angles[-length(angles)])
+)
+
+# Merge node positions with edge data
+edges <- merge(edges, node_positions, by.x = "from", by.y = "name", suffixes = c(".from", ".to"))
+edges <- merge(edges, node_positions, by.x = "to", by.y = "name", suffixes = c(".to", ".from"))
+
+# Create the plot
+p <- ggplot() +
+  # Add edges
+  geom_segment(data = edges, aes(x = x.from, y = y.from, xend = x.to, yend = y.to), color = "grey") +
+  # Add nodes
+  geom_point(data = node_positions, aes(x = x, y = y), size = 5, color = "blue") +
+  # Add labels
+  geom_text(data = node_positions, aes(x = x, y = y, label = name), vjust = -1, size = 3) +
+  theme_minimal() +
+  labs(title = "Not Fancy Line-Node Plot Connecting Students and Advisors", x = "", y = "")
+
+# Print the plot
+print(p)
+
+
+
+# Load necessary libraries
+# Load necessary libraries
+# Load necessary libraries
+# Load necessary libraries
+library(igraph)
+library(ggraph)
+library(dplyr)
+
+# Create the data frame with unique names, including Sharon
+data <- data.frame(
+  name = c("Betsy", "Claire", "Henry", "Ian", "John", 
+           "Kyle", "Lucas", "Marwa", "Priya", "Sharon", "Justice","Adam", "Armando", "Barrie","Manoj", "Phil", "Scott", "Shelley1", "Shelley2", 
+           "Simona", "Terence"),
+  department = c("FCS", "AVFS", "EPPN", "Engineering", 
+                 "Computer Science", "CNR", "EPPN", "Politics and Philosophy", 
+                 "Biology", "FCS", "Biology", "Biology", "EPPN", "Biology", 
+                 "Politics and Philosophy", "AVFS", "Biology", "FCS", "FCS", "CNR", "Computer Science"),
+  rank = c("Graduate", "Graduate", "Graduate", "Graduate", "Graduate", 
+           "Graduate", "Graduate", "Graduate", "Graduate", "Graduate", "Graduate", 
+           "Professor", "Professor", "Professor", "Professor", 
+           "Professor", "Professor", "Professor", "Professor", "Professor", "Professor")
+)
+
+# Create edges by connecting nodes in the same department
+edges <- expand.grid(from = data$name, to = data$name) %>%
+  left_join(data, by = c("from" = "name")) %>%
+  left_join(data, by = c("to" = "name"), suffix = c(".from", ".to")) %>%
+  filter(department.from == department.to, from != to)
+
+# Create a graph object
+graph <- graph_from_data_frame(edges, vertices = data, directed = FALSE)
+
+# Plot with ggraph
+ggraph(graph, layout = "fr") +  # 'fr' is a force-directed layout
+  geom_edge_link(aes(color = rank.from), size = 1) +
+  geom_node_point(aes(color = department), size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE, size = 3) +
+  scale_edge_color_manual(values = c("Graduate" = "grey", "Professor" = "red")) +
+  scale_color_brewer(palette = "Set3") +
+  theme_minimal() +
+  labs(title = "Line-Node Plot by Department and Rank")
+
+
+```
+
+```{r}
+# Load necessary libraries
+library(igraph)
+library(ggraph)
+
+# Create the data frame
+advisor_data <- data.frame(
+  from = c("Geraline", "Lucas", "Heidi", "Yaotian", "Ian", "Betsy", "Sharon", 
+           "Priya", "Claire", "Marwa", "Justice", "John", "Kyle", "Henry"),
+  to = c("Scott", "Ed", "Yimin", "Jian", "Ching-An", "Shelley", "Shelley", 
+         "Adam", "Phil", "Manoj", "Nuismer", "Terence", "Simona", "Armando"),
+  Advisor = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)
+)
+
+# Create graph object from the data frame
+graph <- graph_from_data_frame(advisor_data, directed = TRUE)
+
+# Plot with ggraph
+ggraph(graph, layout = 'tree') + 
+  geom_edge_link(arrow = arrow(length = unit(4, 'mm')), end_cap = circle(3, 'mm')) +
+  geom_node_point(size = 5) +
+  geom_node_text(aes(label = name), vjust = -0.5, hjust = 1, size = 3) +
+  theme_minimal() +
+  labs(title = "Hierarchical Tree of Advisors")
+
+```
