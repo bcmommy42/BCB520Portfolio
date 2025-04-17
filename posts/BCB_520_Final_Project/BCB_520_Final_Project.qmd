@@ -62,6 +62,8 @@ ggplot(long_data, aes(x = Bacteria, y = Abundance, fill = Location)) +
 I wanted to compare the mean Relative Abundance across 80 animals, comparing the uninfected quarter to the infected quarter tissue samples. Once again, I am using a bar chart. The color channels represent the infection status of the quarter sample, with red being infected and blue being uninfected. With this bar chart, I asked it for extra genera of bacteria, so this time we have 7 genera (with some specific species as well) and then one category of 'other' genera. We see consistency among the genera based on infection status across all the categories except S.aureus, which is much higher in the infected quarter sample. This makes sense, considering the infected quarter was infused with S.aureus.
 
 
+Initially, I considered using only a bar chart for this data. I opted to add a box and whisker plot as well. A box and whisker plot allows for more information. Box and whisker plots are great because they show you the minimum and maximum of your data (whiskers), the first quartile (below the black line in the colored box), the median (the black line in the colored box),and the third quartile (above the black line in the colored box). They also show outliers which can be helpful for some data. 
+
 ```{r, message=FALSE, warning=FALSE}
 
 set.seed(123)  # For reproducibility
@@ -125,6 +127,30 @@ ggplot(summary_data, aes(x = Bacteria, y = Mean_Abundance, fill = QuarterStatus)
        y = "Mean Abundance (%)") +
   theme_minimal() +
   scale_fill_manual(values = c("Infected" = "red", "Uninfected" = "blue")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Load necessary library
+library(ggplot2)
+library(tidyr)
+
+# Convert data from wide to long format for ggplot2
+long_data <- pivot_longer(
+  data,
+  cols = Staph_aureus:Other,
+  names_to = "Bacteria",
+  values_to = "Abundance"
+)
+
+# Create the box-and-whisker plot with custom fill colors
+ggplot(long_data, aes(x = Bacteria, y = Abundance, fill = QuarterStatus)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Infected" = "tomato", "Uninfected" = "yellow")) +
+  theme_minimal() +
+  labs(
+    title = "Bacterial Abundance by Infection Status",
+    x = "Bacteria Genera",
+    y = "Abundance (%)"
+  ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
@@ -348,7 +374,7 @@ ggplot(long_data1, aes(x = Day, y = Bacteria, fill = Abundance)) +
 
 ## Distribution of Bacterial Abundance by Infection Status and Sample Type
 
-Initially, I considered using a bar chart for this data. Unfortunately, there was just far too much going on for it to be a good visualization tool. I opted for a bar and whisker plot instead. This allowed me to differentiate between the infection status of the tissue using different positions on the plot (Left side is data for the infected and right side is for uninfected) as well as different colors for sample type(blue is secretion while red is tissue). Then I could use the x axis to show the genera of the bacteria and the y axis to show the mean relative abundance. Box and whisker plots are great because they show you the minimum and maximum of your data (whiskers), the first quartile (below the black line in the colored box), the median (the black line in the colored box),and the third quartile (above the black line in the colored box). They also show outliers which can be helpful for some data. This visualization shows pretty similar mean relative abundance patterns in the infected and uninfected tissue, with S.aureus being higher in both secretions and tissue that were infected
+Initially, I considered using a bar chart for this data. Unfortunately, there was just far too much going on for it to be a good visualization tool. I opted for a bar and whisker plot instead. This allowed me to differentiate between the infection status of the tissue using different positions on the plot (Left side is data for the infected and right side is for uninfected) as well as different colors for sample type(blue is secretion while red is tissue). Then I could use the x axis to show the genera of the bacteria and the y axis to show the mean relative abundance. This visualization shows pretty similar mean relative abundance patterns in the infected and uninfected tissue, with S.aureus being higher in both secretions and tissue that were infected
 
 ```{r, message=FALSE, warning=FALSE}
 # Load necessary libraries

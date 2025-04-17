@@ -14,13 +14,13 @@ code-tools: true
 
 library(tidyverse)
 library(dplyr)
-Goalies <-read.csv("Goalies.csv")
-RookieGoalies <-read.csv("RookieGoalies.csv")
-RookieSkaterIndividual <-read.csv("RookieSkaterIndividual.csv")
-RookieSkaterOnIce <- read.csv("RookieSkaterOnIce.csv")
-SkaterIndividualstats <-read.csv("SkaterIndividualstats.csv")
-SkaterOnIcestats <- read.csv("SkaterOnIcestats.csv")
-#RSUCKS <- read.csv("R_sucks.csv")
+Goalies <-read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/Goalies.csv")
+RookieGoalies <-read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/RookieGoalies.csv")
+RookieSkaterIndividual <-read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/RookieSkaterIndividual.csv")
+RookieSkaterOnIce <- read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/RookieSkaterOnIce.csv")
+SkaterIndividualstats <-read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/SkaterIndividualstats.csv")
+SkaterOnIcestats <- read.csv("C:/Users/betsy/OneDrive/Desktop/A5-TabularData/SkaterOnIcestats.csv")
+
 ```
 
 ## Hart Memorial Trophy

@@ -8,8 +8,7 @@ code-fold: true
 code-tools: true
 ---
 
-
-##Spatial Data
+## Spatial Data
 
 I made a heat map of the breastfeeding rates at 6 months across the US, based off of the Breastfeeding Report Card data from the CDC for 2022.
 
