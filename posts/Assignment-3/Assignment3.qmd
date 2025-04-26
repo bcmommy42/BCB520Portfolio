@@ -1,6 +1,7 @@
 ---
-title: "Assignment 3"
-Author: Betsy Church
+title: "Assignment 3- Getting to know GitHub"
+Author: "Betsy Church"
+Date: "February 27, 2025"
 format: html
 categories: [Assignment, DataViz]
 
@@ -9,6 +10,10 @@ code-fold: true
 
 code-tools: true
 ---
+
+## Getting to know R
+
+In this assignment, all I'm doing is using a data set I found to make some visualizations. I am using box and whisker plots to look at breastfeeding rates across the years 2018, 2020, and 2022. I am using Box and Whisker plots again to look at mPINC scores and how they have changed over the years.
 
 ```{r}
  BSBC.Data..BF.and.mPINC.over.3.reports <- read.csv("C:/Users/betsy/OneDrive/Desktop/Master's Degree/BSBC Data. BF and mPINC over 3 reports.csv")

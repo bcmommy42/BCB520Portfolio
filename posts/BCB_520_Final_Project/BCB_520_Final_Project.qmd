@@ -13,7 +13,7 @@ code-tools: true
 
 One of the largest sources of loss in the dairy industry is mastitis. Mastitis, an infection of the mammary tissue, is common before or during first lactation in heifers. Infections during initial lactogenesis can cause issues with low milk supply throughout the first and subsequent lactations in cows. Here, we are trying to determine if there is a change in the udder microbiome by exposing one quarter of the udder to S.aureus via infusion while exposing another different quarter to an infusion of saline. Secretions from the udders were collected over the course of 20 days. On the final day of the study, the heifers were sacrificed and tissue from the 2 quarters were collected. In each quarter, a portion of the tissue close to the gland cistern (center) was collected along with a portion of tissue closer to the fat pad (edge).
 
-Using the collected secretions and tissue samples, we will attempt to discover: 1. Is there a microbiome detectable in mammary tissue? 2. Is there a tissue microbiome difference within the same cow between infected/uninfected quarters of the udder? 3. Is there a tissue microbiome difference within the same cow between the edge versus center tissue of the infected/uninfected tissue? 4. How does an IMI with S. aureus affect the microbiome of milk secretions? Is there a change over time? 5. How does the microbiome of the tissue samples compare to the microbiome of the secretion samples? 
+Using the collected secretions and tissue samples, we will attempt to discover: 1. Is there a microbiome detectable in mammary tissue? 2. Is there a tissue microbiome difference within the same cow between infected/uninfected quarters of the udder? 3. Is there a tissue microbiome difference within the same cow between the edge versus center tissue of the infected/uninfected tissue? 4. How does an IMI with S. aureus affect the microbiome of milk secretions? Is there a change over time? 5. How does the microbiome of the tissue samples compare to the microbiome of the secretion samples?
 
 # Data
 
@@ -61,8 +61,7 @@ ggplot(long_data, aes(x = Bacteria, y = Abundance, fill = Location)) +
 
 I wanted to compare the mean Relative Abundance across 80 animals, comparing the uninfected quarter to the infected quarter tissue samples. Once again, I am using a bar chart. The color channels represent the infection status of the quarter sample, with red being infected and blue being uninfected. With this bar chart, I asked it for extra genera of bacteria, so this time we have 7 genera (with some specific species as well) and then one category of 'other' genera. We see consistency among the genera based on infection status across all the categories except S.aureus, which is much higher in the infected quarter sample. This makes sense, considering the infected quarter was infused with S.aureus.
 
-
-Initially, I considered using only a bar chart for this data. I opted to add a box and whisker plot as well. A box and whisker plot allows for more information. Box and whisker plots are great because they show you the minimum and maximum of your data (whiskers), the first quartile (below the black line in the colored box), the median (the black line in the colored box),and the third quartile (above the black line in the colored box). They also show outliers which can be helpful for some data. 
+Initially, I considered using only a bar chart for this data. I opted to add a box and whisker plot as well. A box and whisker plot allows for more information. Box and whisker plots are great because they show you the minimum and maximum of your data (whiskers), the first quartile (below the black line in the colored box), the median (the black line in the colored box),and the third quartile (above the black line in the colored box). They also show outliers which can be helpful for some data.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -162,11 +161,9 @@ ggplot(long_data, aes(x = Bacteria, y = Abundance, fill = QuarterStatus)) +
 
 Before being able to use a PCoA plot, we must calculate the Bray Curtis Dissimilarity of the data. The Bray Curtis Dissimilarity matrix is a representation of how dissimilar the relative abundance is of different sites/situations. It is on a scale of 0 to 1 with 0 being the relative abundance is identical, and 1 being that the relative abundance is completely different for each location.
 
-Once we have this dissimilarity matrix we can then create a PCoA plot. PCoA plots are tools that are known as metric multi-dimensionally scaling; this means that they can take a lot of different measurements within the data and show it on a lower dimensional scale while maintaining the distances between the objects.
-In a PCoA plot, the x-axis explains the most variance, and the y-axis will explain the second most variance. 
+Once we have this dissimilarity matrix we can then create a PCoA plot. PCoA plots are tools that are known as metric multi-dimensionally scaling; this means that they can take a lot of different measurements within the data and show it on a lower dimensional scale while maintaining the distances between the objects. In a PCoA plot, the x-axis explains the most variance, and the y-axis will explain the second most variance.
 
 Often if sites are similar you will see clustering on a PCoA plot. In this example, we see a clustering together of the uninfected center and uninfected edge tissue, while also seeing a clustering of the infected edge and center tissue. It's not incredibly apparent, as there is obvious overlap as well.
-
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -371,7 +368,6 @@ ggplot(long_data1, aes(x = Day, y = Bacteria, fill = Abundance)) +
 
 ```
 
-
 ## Distribution of Bacterial Abundance by Infection Status and Sample Type
 
 Initially, I considered using a bar chart for this data. Unfortunately, there was just far too much going on for it to be a good visualization tool. I opted for a bar and whisker plot instead. This allowed me to differentiate between the infection status of the tissue using different positions on the plot (Left side is data for the infected and right side is for uninfected) as well as different colors for sample type(blue is secretion while red is tissue). Then I could use the x axis to show the genera of the bacteria and the y axis to show the mean relative abundance. This visualization shows pretty similar mean relative abundance patterns in the infected and uninfected tissue, with S.aureus being higher in both secretions and tissue that were infected
@@ -454,7 +450,6 @@ ggplot(long_data, aes(x = Bacterial_Species, y = Abundance, fill = SampleType)) 
 
 
 ```
-
 
 ## Principal Coordinate Analysis Plot for Tissue Versus Secretions
 
@@ -565,7 +560,6 @@ ggplot(pcoa_df, aes(x = PC1, y = PC2, color = SampleType)) +
 
 
 ```
-
 
 # Conclusions/Summary
 

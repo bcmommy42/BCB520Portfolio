@@ -1,14 +1,17 @@
 ---
 title: "Assignment_6_Hockey_Ballots_Winner"
+Author: "Betsy Church"
+Date: "March 23, 2025"
 format: html
 categories: [Assignment, DataViz]
 code-fold: true
 code-tools: true
-
 ---
+
 ## In this assignment, we are combining everyone's data to figure out who would win each award.
 
 We start out by uploading the data set and getting our library packages all ready.
+
 ```{r, warning=FALSE}
 library(tidyverse)
 library(dplyr)
@@ -16,7 +19,9 @@ library(dplyr)
 CombinedNHL <- read.csv("C:/Users/betsy/OneDrive/CombinedNHL.csv")
 
 ```
+
 ## The Hart Memorial Trophy
+
 ```{r, warning=FALSE}
 
 Hart1 <- CombinedNHL %>%
@@ -42,6 +47,7 @@ geom_col()+
        
 
 ```
+
 Based on the classroom votes, the winner of the Hart Trophy is **Leon Draisaitl**
 
 ## The Vezina Trophy
@@ -72,8 +78,8 @@ geom_col()+
 
 Based on classroom votes, **Connor Hallebuyck** is the winner!
 
-
 ## The Calder Memorial Trophy
+
 ```{r, warning=FALSE}
 Cal <- CombinedNHL %>%
   select(Award, Rank, Player) %>%
@@ -123,9 +129,11 @@ geom_col()+
   xlab("Weighted Score")+
   ylab("Player")
 ```
+
 Based on the classroom votes, the winner is **Brandon Tanev**
 
 ## The Lady Byng Memorial Trophy
+
 ```{r, warning=FALSE}
 Byng<- CombinedNHL %>%
   select(Award, Rank, Player) %>%
@@ -152,6 +160,7 @@ geom_col()+
 Based on classroom votes, the winner is **Brayden Point**
 
 ## The James Norris Memorial Trophy
+
 ```{r, warning=FALSE}
 
 Norris<- CombinedNHL %>%

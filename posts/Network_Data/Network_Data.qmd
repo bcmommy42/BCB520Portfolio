@@ -1,6 +1,12 @@
 ---
 title: "Network_Data"
+Author: "Betsy Church"
+Date: "April 15,2025"
 format: html
+categories: [Assignment, DataViz]
+
+code-fold: true
+code-tools: true
 ---
 
 ```{r, message=FALSE, warning=FALSE}

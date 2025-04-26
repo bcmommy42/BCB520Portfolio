@@ -1,6 +1,7 @@
 ---
 title: "Assignment 1"
-Author: Betsy Church
+Author: "Betsy Church"
+Date: "February 27,2025"
 format: html
 
 categories: [Assignment, DataViz]
