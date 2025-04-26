@@ -1,7 +1,7 @@
 ---
 title: "Assignment_6_Hockey_Ballots_Winner"
-Author: "Betsy Church"
-Date: "March 23, 2025"
+author: "Betsy Church"
+date: "March 23, 2025"
 format: html
 categories: [Assignment, DataViz]
 code-fold: true

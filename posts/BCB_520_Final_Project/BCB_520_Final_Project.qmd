@@ -2,7 +2,7 @@
 title: "BCB 520 Final Project"
 subtitle: "The Impact of Staph. aureus Mastitis on Udder Tissue and Secretions in Heifers During Induced Lactogenesis"
 author: "Betsy Church"
-date: "4/3/2025"
+date: "4/26/2025"
 format: html
 categories: [Assignment, DataViz]
 code-fold: true
@@ -19,7 +19,6 @@ Using the collected secretions and tissue samples, we will attempt to discover: 
 
 **Since this research is still in the data collection phase, I chose to use mock data that Anything LLM came up with for me.**
 
-This data set was not conducive to spatial or networking data. For this, I will be using breastfeeding rates by state, found at https://www.cdc.gov/breastfeeding-data/breastfeeding-report-card/index.html
 
 # Visualizations
 
@@ -30,6 +29,8 @@ I asked Anything LLM to make me a mock relative abundance data set for tissue fr
 ```{r, message= FALSE,warning=FALSE}
 
 library(tidyverse)
+library(vegan)
+
 use_this_mock <-read.csv("C:/Users/betsy/OneDrive/use_this_mock.csv")
 data <- data.frame(use_this_mock,
   Location = c('Edge', 'Center'),
@@ -128,9 +129,6 @@ ggplot(summary_data, aes(x = Bacteria, y = Mean_Abundance, fill = QuarterStatus)
   scale_fill_manual(values = c("Infected" = "red", "Uninfected" = "blue")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Load necessary library
-library(ggplot2)
-library(tidyr)
 
 # Convert data from wide to long format for ggplot2
 long_data <- pivot_longer(
@@ -170,8 +168,7 @@ Often if sites are similar you will see clustering on a PCoA plot. In this examp
 # Set a CRAN mirror
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
-# Now install packages
-install.packages("vegan")
+
  
 set.seed(123)  # For reproducibility
 
@@ -236,11 +233,8 @@ for (i in 1:n_animals) {
 head(data)
 
 # Load necessary libraries
-install.packages("vegan")
-install.packages("ggplot2")
-library(vegan)
-library(ggplot2)
-library(dplyr)
+
+
 
 # Generate the data (based on the previous example)
 set.seed(123)  # For reproducibility
@@ -324,46 +318,126 @@ ggplot(pcoa_df, aes(x = PC1, y = PC2, color = SampleType)) +
 
 ## Heat Map of Secretion Data
 
-I wanted to look at several things at once, including relative abundance differences between the days secretions were collected, between infection status, and between the different animals. This heat map allowed me to look at all of the above in an easy and concise manner. I also was able to create a heatmap showing just the average overall relative abundance and used that to compare the infected versus the uninfected samples across the 20 days of collection.
+I wanted to look at several things at once, including relative abundance differences between the days secretions were collected, between infection status, and between the different animals. These heat maps allowed me to look at all of the above in an easy and concise manner. I also was able to create a heat map showing just the average overall relative abundance and used that to compare the infected versus the uninfected samples across the 20 days of collection.
 
 ```{r, message=FALSE, warning=FALSE}
 
-mock_quarters_daily <-read.csv("C:/Users/betsy/OneDrive/mock_quarters_daily.csv")
 
-# Convert data to long format
-long_data2 <- mock_quarters_daily %>%
-  pivot_longer(cols = Staph.aureus:Other, 
-               names_to = "Bacteria", 
-               values_to = "Abundance")
+set.seed(123)  # For reproducibility
 
-# Create the heat map
-ggplot(long_data2, aes(x = Day, y = Bacteria, fill = Abundance)) +
-  geom_tile() +
-  facet_grid(Quarter ~ Animal.ID) +
+# Function to generate random percentages that sum to 100
+generate_abundance <- function() {
+  nums <- sample(1:99, 4)
+  nums <- sort(nums)
+  diffs <- diff(c(0, nums, 100))
+  return(diffs)
+}
+
+# Create the dataset
+n_animals <- 80
+days <- c(1, 4, 8, 14, 20)
+data <- data.frame()
+
+for (i in 1:n_animals) {
+  animal_id <- sprintf("A%02d", i)
+  
+  for (day in days) {
+    for (status in c("Infected", "Uninfected")) {
+      abundance <- generate_abundance()
+      
+      # Adjust Staph_aureus for infected samples
+      if (status == "Infected") {
+        abundance[1] <- abundance[1] + 50
+        abundance <- round(100 * abundance / sum(abundance))
+      }
+      
+      sample_id <- sprintf("S%03d_%d", i, day)
+      
+      sample_data <- data.frame(
+        Sample_ID = sample_id,
+        Animal_ID = animal_id,
+        Day = day,
+        Quarter = status,
+        Staph_aureus = abundance[1],
+        E_coli = abundance[2],
+        Lactobacillus = abundance[3],
+        Bacillus = abundance[4],
+        Other = 100 - sum(abundance[1:4])
+      )
+      
+      data <- rbind(data, sample_data)
+    }
+  }
+}
+
+# Display the first few rows
+head(data)
+
+
+
+
+# Pivot data to long format for ggplot2
+long_data4 <- pivot_longer(
+  data,
+  cols = Staph_aureus:Other,
+  names_to = "Bacteria",
+  values_to = "Abundance"
+)
+
+
+
+# Pivot data to long format for ggplot2
+long_data4 <- pivot_longer(
+  data,
+  cols = Staph_aureus:Other,
+  names_to = "Bacteria",
+  values_to = "Abundance"
+)
+
+
+# Create the heatmap
+ggplot(long_data4, aes(x = Animal_ID, y = Bacteria, fill = Abundance)) +
+  geom_tile(color = "grey") +  # Add borders for clarity
+  facet_grid(Day ~ Quarter) +  # Facet by both day and infection status
   scale_fill_gradient(low = "white", high = "red") +
-  labs(title = "Heat Map of Relative Abundance: Secretions by Day, Quarter, and Animal",
-       x = "Day",
-       y = "Bacterial Species",
-       fill = "Abundance") +
-  theme_minimal()
+  theme_minimal() +
+  labs(
+    title = "Bacterial Abundance Heatmap by Day and Infection Status",
+    x = "Animal ID",
+    y = "Bacteria"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 6),
+    axis.text.y = element_text(size = 8),
+    strip.text = element_text(size = 10),
+    plot.title = element_text(size = 14, face = "bold")
+  )
 
-read.csv("C:/Users/betsy/OneDrive/mock_quarters_daily.csv")
 
-long_data1 <- mock_quarters_daily %>%
-  pivot_longer(cols = Staph.aureus:Other, 
-               names_to = "Bacteria", 
-               values_to = "Abundance")
 
-# Create the heat map
-ggplot(long_data1, aes(x = Day, y = Bacteria, fill = Abundance)) +
-  geom_tile() +
-  facet_wrap(~ Quarter) +
+# Calculate average abundance by day and infection status
+average_data <- long_data4 %>%
+  group_by(Day, Quarter, Bacteria) %>%
+  summarize(Average_Abundance = mean(Abundance, na.rm = TRUE))
+
+# Create the heatmap
+ggplot(average_data, aes(x = Day, y = Bacteria, fill = Average_Abundance)) +
+  geom_tile(color = "grey") +  # Add borders for clarity
+  facet_wrap(~ Quarter, ncol = 1) +  # Separate by infection status
   scale_fill_gradient(low = "white", high = "red") +
-  labs(title = "Heat Map of Relative Abundance in Secretion by Day and Quarter",
-       x = "Day",
-       y = "Bacterial Species",
-       fill = "Abundance") +
-  theme_minimal()
+  theme_minimal() +
+  labs(
+    title = "Average Bacterial Abundance by Day & Infection Status",
+    x = "Day",
+    y = "Bacteria"
+  ) +
+  theme(
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    strip.text = element_text(size = 10),
+    plot.title = element_text(size = 14, face = "bold")
+  )
+
 
 
 ```
@@ -374,10 +448,6 @@ Initially, I considered using a bar chart for this data. Unfortunately, there wa
 
 ```{r, message=FALSE, warning=FALSE}
 # Load necessary libraries
-install.packages("ggplot2")
-library(ggplot2)
-library(dplyr)
-library(tidyr)
 
 # Generate the mock microbiome data (based on the previous example)
 set.seed(123)  # For reproducibility
@@ -487,12 +557,7 @@ for (i in 1:n_animals) {
 head(data)
 
 
-# Load necessary libraries
-install.packages("vegan")
-install.packages("ggplot2")
-library(vegan)
-library(ggplot2)
-library(dplyr)
+
 
 # Generate the data (based on the previous example)
 set.seed(123)  # For reproducibility
@@ -566,3 +631,4 @@ ggplot(pcoa_df, aes(x = PC1, y = PC2, color = SampleType)) +
 If the mock data were actually a true representation of my data, I would conclude that there is a tissue microbiome, because we did find multiple genera of bacteria. The relative abundance of bacteria is different between the two tissue locations, with edge tissue having slightly higher abundance across all found genera. Whether it is statistically different is currently unknown because I did not run statistics. Considering mean relative abundance of bacteria in uninfected versus infected tissue, the graph shows that the uninfected tissue generally has slightly higher relative abundance across the board, with the exception of S.aureus, which one would expect when that is the infectious agent. Looking at the PCoA plot for tissue location and infection status, it seems there might be some clustering based on infection status, but it's not clear. When looking at the heat map for secretions, there doesn't seem to be a difference in the relative abundance between the days for any of the genera, but there is a distinct difference between the infected and uninfected secretions overall, with Lactobacillus being the most abundant genera in the uninfected and S.aureus being the most abundant in the infected secretions. Comparing the mean relative abundance of bacteria of the tissue to the secretions based on infection status doesn't show us that they are related. For example, the Relative Abundance of Bacillus in the infected tissue is not the same as the Relative Abundance of Bacillus in the infected secretions.
 
 I am very interested to see what my actual data shows!
+

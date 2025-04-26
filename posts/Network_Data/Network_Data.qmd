@@ -1,7 +1,7 @@
 ---
 title: "Network_Data"
-Author: "Betsy Church"
-Date: "April 15,2025"
+author: "Betsy Church"
+date: "April 15,2025"
 format: html
 categories: [Assignment, DataViz]
 

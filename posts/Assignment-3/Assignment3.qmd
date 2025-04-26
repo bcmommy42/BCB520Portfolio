@@ -1,7 +1,7 @@
 ---
 title: "Assignment 3- Getting to know GitHub"
-Author: "Betsy Church"
-Date: "February 27, 2025"
+author: "Betsy Church"
+date: "March 1, 2025"
 format: html
 categories: [Assignment, DataViz]
 

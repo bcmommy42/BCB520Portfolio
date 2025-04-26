@@ -2,15 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Anscomb-Quartet/Assignment_1.html",
-      "/posts/Assignment-3/Assignment3.html",
-      "/posts/Assignment_5_Hockey_Ballot/Assignment_5_Hockey_Ballot.html",
-      "/posts/Data-Set-Assignment-2/Assignment 2.html",
-      "/posts/HockeyBallotAllTogether/Hockey_Ballots_Winner.html",
-      "/posts/MarksChannels/index.html",
+      "/posts/BCB_520_Final_Project/BCB_520_Final_Project.html",
       "/posts/Network_Data/Network_Data.html",
       "/posts/Spatial_Data/Spatial_Data.html",
-      "/posts/BCB_520_Final_Project/BCB_520_Final_Project.html",
+      "/posts/HockeyBallotAllTogether/Hockey_Ballots_Winner.html",
+      "/posts/Assignment_5_Hockey_Ballot/Assignment_5_Hockey_Ballot.html",
+      "/posts/MarksChannels/index.html",
+      "/posts/Assignment-3/Assignment3.html",
+      "/posts/Data-Set-Assignment-2/Assignment 2.html",
+      "/posts/Anscomb-Quartet/Assignment_1.html",
       "/posts/welcome/index.html"
     ]
   }
